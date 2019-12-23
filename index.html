@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Block Breaker</title>
+    
+    
+</head>
+<style>
+    body{
+         margin: 0 auto ;
+         
+    }
+    #gamescreen{
+        border: 1px solid black;  
+        margin: 0 auto;     
+    }
+    #game_ball{
+         display: none; 
+        width: 10px;
+    }
+     #bricks{
+         display: none; 
+        width: 10px;
+    } 
+    #pause{
+        display: none; 
+    }
+</style>
+
+<body>
+
+    <img id="game_ball" src="/src/images/Sports-Basketball-PNG.png">
+    <img id="bricks" src="/src/images/PinClipart.com_super-mario-clipart_4121352.png">
+    <p id="pause">Paused</p>
+    <canvas id="gamescreen" width="800" height="600"></canvas>
+
+<script type="module" src="/src/index.mjs"></script>
+</body>
+
+</html>
