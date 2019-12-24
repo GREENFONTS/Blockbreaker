@@ -16,7 +16,8 @@ const GAMESTATE = {
     MENU: 2,
     GAMEOVER: 3,
     NEWLEVEL: 4,
-    MENUTONXTLEVEL: 5
+    MENUTONXTLEVEL: 5,
+    INSTRUCTIONS: 6
 };
 
 export default class game {
@@ -36,18 +37,26 @@ export default class game {
         new InputHandler(this.paddle, this);
     }
     
-    start() { 
-        if (this.gamestate !== GAMESTATE.MENU &&
+    start() {
+        if (this.gamestate !== GAMESTATE.INSTRUCTIONS &&
             this.gamestate !== GAMESTATE.NEWLEVEL &&
-            this.gamestate !== GAMESTATE.MENUTONXTLEVEL) {
+            this.gamestate !== GAMESTATE.MENUTONXTLEVEL &&
+            this.gamestate !== GAMESTATE.GAMEOVER) {
             return;
+        };
+
+        if (this.gamestate === GAMESTATE.MENUTONXTLEVEL) {
+            this.gamestate = GAMESTATE.NEWLEVEL;
+            this.start();
         }
+        
 
         this.Brick = buildLevel(this, this.levels[this.currentlevel]);
         this.gameball.resetgame();
         this.gameobjs = [this.gameball, this.paddle,];
 
-         this.gamestate = GAMESTATE.RUNNING;
+        this.gamestate = GAMESTATE.RUNNING;
+       
     }
 
     update(deltaTime) {
@@ -57,18 +66,22 @@ export default class game {
 
         if (this.gamestate === GAMESTATE.PAUSED ||
             this.gamestate === GAMESTATE.MENU ||
-            this.gamestate === GAMESTATE.GAMEOVER) {
+            this.gamestate === GAMESTATE.GAMEOVER ||
+            this.gamestate === GAMESTATE.INSTRUCTIONS ||
+            this.gamestate === GAMESTATE.MENUTONXTLEVEL) {
             return;
 
-        };  
-       //action for changing to new level
+        };
+
+        
+        //action for changing to new level
         if (this.Brick.length === 0) {
             this.currentlevel++;
-            this.gamestate = GAMESTATE.NEWLEVEL;
-            this.start();
+            this.gamestate = GAMESTATE.MENUTONXTLEVEL;           
             
            
         };
+        
         
 
         [...this.gameobjs, ...this.Brick].forEach(object => (object.update(deltaTime)
@@ -110,10 +123,8 @@ export default class game {
             ctx.fillText("BLOCK BREAKER GAME", this.gameWidth / 2, this.gameHeight / 2 - 150);
             ctx.fillStyle = "white";
             ctx.font = "30px Arial";
-            ctx.fillText("Press SPACEBAR to Start", this.gameWidth / 2, this.gameHeight / 2 + 50)
-            ctx.font = "25px Arial";
-            ctx.fillText("You have 3 lives in the Game",
-                this.gameWidth / 2, this.gameHeight / 2 + 130)
+            ctx.fillText("Press SHIFT to Continue", this.gameWidth / 2, this.gameHeight / 2 + 50)
+            
             ctx.font = "25px Arial";
             ctx.fillStyle = "grey";
             ctx.textAlign = "right";
@@ -136,18 +147,44 @@ export default class game {
             ctx.fillText("Refresh to Start New Game", this.gameWidth / 2, this.gameHeight / 2 + 100)
 
         }
-        //still working on this
-        // if (this.gamestate === GAMESTATE.MENUTONXTLEVEL) {
-        //     ctx.rect(0, 0, this.gameWidth, this.gameHeight);
-        //     ctx.fillStyle = "rgba(0,0,0,1)";
-        //     ctx.fill();
+        if (this.gamestate === GAMESTATE.INSTRUCTIONS) {
+            ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            ctx.fillStyle = "rgba(0,0,0,1)";
+            ctx.fill();
 
-        //     ctx.font = " 30px Arial";
-        //     ctx.fillStyle = "orange";
-        //     ctx.textAlign = "center";
-        //     ctx.fillText("Press SPACEBAR to Continue to Next Level ", this.gameWidth / 2, this.gameHeight / 2);
+            ctx.font = " 50px Arial";
+            ctx.fillStyle = "orange";
+            ctx.textAlign = "center";
+            ctx.fillText("INSTRUCTIONS", this.gameWidth / 2, this.gameHeight / 2 - 150);
+
+            ctx.fillStyle = "white";
+            ctx.font = "25px Arial";
+            ctx.fillText("Please read the instructions carefully", this.gameWidth / 2, this.gameHeight / 2 - 80);
             
-        // }
+            ctx.textAlign = "left";
+            ctx.fillStyle = "white";
+            ctx.font = "25px Arial";
+            ctx.fillText( "*  " + "You have 3 lives in the Game",
+                this.gameWidth / 2 - 350, this.gameHeight / 2 + 50)
+            
+            ctx.fillText("*  " +"Press Enter to Pause the Game", this.gameWidth / 2 - 350, this.gameHeight / 2 + 100)
+            
+            ctx.fillText("*  " + "Press SPACEBAR to Start the Game", this.gameWidth / 2 - 350, this.gameHeight / 2 + 150)
+            
+
+        }
+    
+        if (this.gamestate === GAMESTATE.MENUTONXTLEVEL) {
+            ctx.rect(0, 0, this.gameWidth, this.gameHeight);
+            ctx.fillStyle = "rgba(0,0,0,1)";
+            ctx.fill();
+
+            ctx.font = " 30px Arial";
+            ctx.fillStyle = "orange";
+            ctx.textAlign = "center";
+            ctx.fillText("Press SPACEBAR to Continue to  Level " + (this.currentlevel + 1), this.gameWidth / 2, this.gameHeight / 2);
+            
+        }
     }
     //controls the pausing of game
     togglepaused() {
@@ -160,14 +197,13 @@ export default class game {
 
     };
     //stillworking ont this
-    // prompt() {
-    //     if (this.gamestate !== GAMESTATE.MENUTONXTLEVEL) {
-            
-    //     }
-    //     else {
-    //         this.gamestate == GAMESTATE.NEWLEVEL;
-    //     }
-        
-        
-    // };
-}
+    prompt() {
+        if (this.gamestate === GAMESTATE.MENU) {
+            this.gamestate = GAMESTATE.INSTRUCTIONS;
+        }
+        else {
+            return;
+        };
+             
+         };
+    }
