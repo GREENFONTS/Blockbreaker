@@ -2,6 +2,7 @@
 import game from './game.mjs';
 
 
+let restart = document.getElementById('restart');
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
 
@@ -10,8 +11,14 @@ let ctx = canvas.getContext("2d");
 
 let Game = new game(GAME_WIDTH, GAME_HEIGHT);
 
+function start() {
+    Game = new game(GAME_WIDTH, GAME_HEIGHT);
+}
+start()
+
 let lastime = 0;
  
+
 
 function gameLoop(timestamp) {
     let deltaTime = timestamp - lastime;
@@ -28,3 +35,8 @@ function gameLoop(timestamp) {
 
 }
 requestAnimationFrame(gameLoop);
+
+restart.onclick = function () {
+    start()
+}
+

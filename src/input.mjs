@@ -4,7 +4,7 @@ export default class InputHandler{
 
     constructor(paddle, Game) {
         document.addEventListener("keydown", event => {
-
+            
             switch (event.keyCode) {
                 //eventlistenterfor moving the paddle to right
                 case 37:
@@ -23,11 +23,12 @@ export default class InputHandler{
                     Game.start();
                     break;
                 //stillworking on these
-                 case 16:
+                case 16:
                     Game.prompt();
                     break;
-            }
+                
 
+            }
         });
         //same as above both for keyup event
         document.addEventListener("keyup", event => {

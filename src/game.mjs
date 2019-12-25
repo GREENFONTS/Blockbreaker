@@ -9,6 +9,7 @@ import bricks from '../src/bricks.mjs';
 
 import { buildLevel, level1, level2, level3, level4 } from '../src/levels.mjs';
 
+
 //different gamestate or canvas
 const GAMESTATE = {
     PAUSED: 0,
@@ -66,7 +67,6 @@ export default class game {
 
         if (this.gamestate === GAMESTATE.PAUSED ||
             this.gamestate === GAMESTATE.MENU ||
-            this.gamestate === GAMESTATE.GAMEOVER ||
             this.gamestate === GAMESTATE.INSTRUCTIONS ||
             this.gamestate === GAMESTATE.MENUTONXTLEVEL) {
             return;
@@ -205,5 +205,7 @@ export default class game {
             return;
         };
              
-         };
-    }
+    };
+    
+    
+}
