@@ -1,15 +1,17 @@
 //main js file
 import game from './game.mjs';
 
-
 let restart = document.getElementById('restart');
 let canvas = document.getElementById("gamescreen");
 let ctx = canvas.getContext("2d");
 
  const GAME_WIDTH = 800;
  const GAME_HEIGHT = 600;
-
-let Game = new game(GAME_WIDTH, GAME_HEIGHT);
+ let Game ;
+function start(){
+     Game = new game(GAME_WIDTH, GAME_HEIGHT);
+}
+start()
 
 function start() {
     Game = new game(GAME_WIDTH, GAME_HEIGHT);
