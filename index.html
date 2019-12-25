@@ -28,6 +28,14 @@
     #pause{
         display: none; 
     }
+    #restart{
+        width:800px;
+        border-radius: 20px;
+        background-color: brown;
+        height:50px;
+        font-size:2rem;
+        outline: none;
+    }
 </style>
 
 <body>
@@ -35,8 +43,9 @@
     <img id="game_ball" src="/src/images/Sports-Basketball-PNG.png">
     <img id="bricks" src="/src/images/PinClipart.com_super-mario-clipart_4121352.png">
     <p id="pause">Paused</p>
+    
     <canvas id="gamescreen" width="800" height="600"></canvas>
-
+     <button id='restart'>Restart</button>
 <script type="module" src="/src/index.mjs"></script>
 </body>
 
