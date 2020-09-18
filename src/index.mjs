@@ -7,14 +7,11 @@ let ctx = canvas.getContext("2d");
 
  const GAME_WIDTH = 800;
  const GAME_HEIGHT = 600;
- let Game ;
+let Game;
+ 
+
 function start(){
      Game = new game(GAME_WIDTH, GAME_HEIGHT);
-}
-start()
-
-function start() {
-    Game = new game(GAME_WIDTH, GAME_HEIGHT);
 }
 start()
 
@@ -36,6 +33,7 @@ function gameLoop(timestamp) {
     requestAnimationFrame(gameLoop);
 
 }
+
 requestAnimationFrame(gameLoop);
 
 restart.onclick = function () {

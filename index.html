@@ -5,18 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Block Breaker</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     
 </head>
 <style>
-    body{
-         margin: 0 auto ;
-         
-    }
-    #gamescreen{
-        border: 1px solid black;  
-        margin: 0 auto;     
-    }
+   #gamescreen{
+       border: 1px solid black;
+   }
     #game_ball{
          display: none; 
         width: 10px;
@@ -35,20 +32,26 @@
         height:50px;
         font-size:2rem;
         outline: none;
+        margin-top: 20px;
     }
 </style>
 
 <body>
+    <div class="container pt-5 m-auto">
+        <img id="game_ball" src="/src/images/Sports-Basketball-PNG.png">
+        
+        <img id="bricks" src="/src/images/PinClipart.com_super-mario-clipart_4121352.png">
+        <div class="row">
+            <canvas id="gamescreen" width="800" height="600" ></canvas>
+            
+        </div>
+        
+        
+        <button id='restart'>Restart</button>
 
+    </div>
     
-    <img id="game_ball" src="/src/images/Sports-Basketball-PNG.png">
-
-    <img id="bricks" src="/src/images/PinClipart.com_super-mario-clipart_4121352.png">
-    
-    <canvas id="gamescreen" width="800" height="600"></canvas>
-    
-    <button id='restart'>Restart</button>
-
+   
 <script type="module" src="/src/index.mjs"></script>
 </body>
 

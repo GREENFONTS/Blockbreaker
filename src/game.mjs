@@ -30,7 +30,6 @@ export default class game {
         this.gameball = new ball(this);
         this.paddle = new Paddle(this);
         this.live = 3;
-        // this.r = 1;
         this.Brick = [];
         this.levels = [level1, level2, level3, level4];
         this.currentlevel = 0;
@@ -144,7 +143,7 @@ export default class game {
             ctx.fillText("GAME OVER", this.gameWidth / 2, this.gameHeight / 2 - 150);
             ctx.fillStyle = "white";
             ctx.font = "30px Arial";
-            ctx.fillText("Refresh to Start New Game", this.gameWidth / 2, this.gameHeight / 2 + 100)
+            ctx.fillText("Start New Game", this.gameWidth / 2, this.gameHeight / 2 + 100)
 
         }
         if (this.gamestate === GAMESTATE.INSTRUCTIONS) {
